@@ -27,18 +27,21 @@ create table writes (
     authorId int,
     primary key (isbn, authorId),
     foreign key (isbn) references book(isbn),
-    foreign key (authorId) references author(id));
+    foreign key (authorId) references author(id)
+		on update cascade on delete cascade);
 
 create table publishes (
 	isbn nvarchar(20),
     publisherId int,
     primary key (isbn, publisherId),
     foreign key (isbn) references book(isbn),
-    foreign key (publisherId) references publisher(id));
+    foreign key (publisherId) references publisher(id)
+		on update cascade on delete cascade);
     
 create table is_of_type (
 	isbn nvarchar(20),
     fname nvarchar(20),
     primary key (isbn, fname),
     foreign key (isbn) references book(isbn),
-    foreign key (fname) references bformat(fname));
+    foreign key (fname) references bformat(fname)
+		on update cascade on delete cascade);
