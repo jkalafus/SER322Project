@@ -6,21 +6,21 @@ create table book (
 
 create table author (
 	id int primary key,
-    ProfessionalDesignation nvarchar(50),
+    professionalDesignation nvarchar(50),
     firstName nvarchar(50),
     lastName nvarchar(50));
     
 create table publisher (
 	id int primary key,
-    pname nvarchar(200),
+    pName nvarchar(200),
     address nvarchar(200));
     
 create table genre (
-	gname nvarchar(20) primary key,
+	gName nvarchar(20) primary key,
     gtype nvarchar(20));
     
 create table bformat (
-	fname nvarchar(20) primary key);
+	fName nvarchar(20) primary key);
     
 create table writes (
 	isbn nvarchar(20),
@@ -40,8 +40,8 @@ create table publishes (
     
 create table is_of_type (
 	isbn nvarchar(20),
-    fname nvarchar(20),
-    primary key (isbn, fname),
+    fName nvarchar(20),
+    primary key (isbn, fName),
     foreign key (isbn) references book(isbn),
-    foreign key (fname) references bformat(fname)
+    foreign key (fName) references bformat(fName)
 		on update cascade on delete cascade);
