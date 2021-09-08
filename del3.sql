@@ -45,3 +45,16 @@ create table is_of_type (
     foreign key (isbn) references book(isbn),
     foreign key (fName) references bformat(fName)
 		on update cascade on delete cascade);
+        
+insert into book (`isbn`, `title`, `isRead`, `numberPages`)
+	values 
+		('978-0142437230', 'Don Quixote', 0, 1072),
+        ('978-0191569579', 'Pilgrims Progress', 1, 380),
+        ('978-1503292383', 'Robinson Cruesoe', 1, 158),
+        ('978-0486292731', 'Gullivers Travels', 1, 158),
+        ('978-1426221774', 'Cosmic Queries', 0, 312),
+        ('978-0671562717', 'My Life With The Chimpanzees', 1, 160),
+        ('978-0451524935', '1984', 1, 328),
+        ('978-1493663644', 'Emma', 1, 208),
+        ('978-0553380163', 'A Brief History of Time', 1, 212);
+        
