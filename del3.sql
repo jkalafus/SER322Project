@@ -1,40 +1,93 @@
 CREATE SCHEMA BOOKS;
 ​
 CREATE TABLE Book
-  (ISBN int primary key, 
-  Title nvarchar(200), 
+(
+  ISBN int not null, 
+  Title nvarchar(200) not null, 
   IsRead bit, 
-  Genre nvarchar(20),
-	BFormat nvarchar(20), 
-  PublisherId int, 
-  AuthorId int, 
-  NumberOfPages int);
+  NumberOfPages int not null,
+  constraint BookPK
+    primary key (ISBN),
+);
                   
 CREATE TABLE Author
-  (Id int primary key, 
+(
+  Id int not null, 
   ProfessionalDesignation nvarchar(10), 
-  FirstName nvarchar(50), 	  
-  LastName nvarchar(100), 
-  foreign key (Id) references Book(AuthorId) 
-      on update cascade on delete cascade
-  );
+  FirstName nvarchar(50) not null, 	  
+  LastName nvarchar(100) not null, 
+  constraint AuthorPK
+    primary key (Id),
+);
                     
 CREATE TABLE Publisher
-  (Id int primary key, 
-    PName nvarchar(200), 
-    Address nvarchar(200), 
-    foreign key (Id) references Book(PublisherId) 
-      on update cascade on delete cascade
-  );
+(
+  Id int not null, 
+  PName nvarchar(200) not null, 
+  Address nvarchar(200), 
+  constraint PublisherPK
+    primary key (Id),
+);
 ​
 CREATE TABLE Genre
-  (GName nvarchar(20) primary key, 
+(
+  GName nvarchar(20) not null, 
   GType nvarchar(20), 
-  foreign key (GName) references Book(Genre) 
-    on update cascade on delete cascade);
+  constraint GenrePK
+    primary key (GName),
+  );
 ​
 CREATE TABLE BFormat
-  (FName nvarchar(20) primary key, 
-  foreign key (FName) references Book(BFormat) 
-    on update cascade on delete cascade
-  );
+(
+  FName nvarchar(20) not null, 
+  constraint BFormatPK
+    primary key (FName),
+);
+
+create table Writes
+(
+  ISBN int not null,
+  AuthorId int not null,
+  constraint WritesFKtoBook
+    foreign key (ISBN) references Book(ISBN)
+      on delete cascade on update cascade,
+  constraint WritesFKtoAuthor
+    foreign key (AuthorId) references Author(Id)
+      on delete cascade on update cascade,
+);
+
+create table Publishes
+(
+  ISBN int not null,
+  PublisherId int not null,
+  constraint PublishesFKtoBook
+    foreign key (ISBN) references Book(ISBN)
+      on delete cascade on update cascade,
+  constraint PublishesFKtoPublisher
+    foreign key (Publisher) references Publisher(Id)
+      on delete cascade on update cascade,
+);
+
+create table Belongs
+(
+  ISBN int not null,
+  GenreName nvarchar(20) not null,
+  constraint BelongsFKtoBook
+    foreign key (ISBN) references Book(ISBN)
+      on delete cascade on update cascade,
+  constraint BelongsFKtoGenre
+    foreign key (GenreName) references Genre(GName)
+      on delete cascade on update cascade,
+);
+
+create table Is_of_type
+(
+  ISBN int not null,
+  FormatName nvarchar(20) not null,
+  constraint Is_of_typeFKtoBook
+    foreign key (ISBN) references Book(ISBN)
+      on delete cascade on update cascade,
+  constraint IS_of_typeFKtoBFormat
+    foreign key (FormatName) references BFormat(FName)
+      on delete cascade on update cascade,
+);
