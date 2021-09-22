@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `books`;
+USE `books`;
+
 create table book (
 	isbn nvarchar(20) primary key,
     title nvarchar(200),
