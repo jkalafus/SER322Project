@@ -49,6 +49,14 @@ create table is_of_type (
     foreign key (fName) references bformat(fName)
 		on update cascade on delete cascade);
         
+create table belongs (
+	isbn nvarchar(20),
+    gName nvarchar(20),
+    primary key (isbn, gName),
+    foreign key (isbn) references book(isbn),
+    foreign key (gName) references genre(gName)
+		on update cascade on delete cascade);
+        
 insert into book (`isbn`, `title`, `isRead`, `numberPages`)
 	values 
 		('978-0142437230', 'Don Quixote', 0, 1072),
@@ -138,3 +146,16 @@ insert into writes (`isbn`, `authorId`)
         ('978-0451524935', 8),
         ('978-1493663644', 9),
         ('978-0553380163', 1);
+        
+insert into belongs (`isbn`, `gName`)
+	values
+		('978-0142437230', 'Satire'),
+        ('978-0191569579', 'Religion'),
+        ('978-1503292383', 'Adventure'),
+        ('978-0486292731', 'Satire'),
+        ('978‐18535260216', 'Satire'),
+        ('978-1426221774', 'Science'),
+        ('978-0671562717', 'Science'),
+        ('978-0451524935', 'Political'),
+        ('978-1493663644', 'Satire'),
+        ('978-0553380163', 'Science');
