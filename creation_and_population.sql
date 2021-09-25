@@ -145,7 +145,7 @@ insert into writes (`isbn`, `authorId`)
         ('978-0671562717', 7),
         ('978-0451524935', 8),
         ('978-1493663644', 9),
-        ('978-0553380163', 1);
+        ('978-0553380163', 10);
         
 insert into belongs (`isbn`, `gName`)
 	values
