@@ -15,4 +15,11 @@ insert into is_of_type (`isbn`, `fName`)
     
 insert into publishes (`isbn`, `publisherId`)
 	values ('978-0-06-197796-1', 11);
-    
+
+insert into genre (`gName`, `gType`)
+		values('Thriller', 'Fiction');
+        
+insert into belongs (`isbn`, `gName`)
+	values ('978-0-06-197796-1', 'Thriller');
+
+        
